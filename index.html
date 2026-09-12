@@ -3,7 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HUBGEN:theme start -->
+  <script>
+    (function(){try{var k="arschul:theme",v=localStorage.getItem(k);
+      if(!v){var old=["hub-theme","theme","gh-theme","adv-theme","reviews-theme","worksheets-theme"];
+        for(var i=0;i<old.length;i++){var o=localStorage.getItem(old[i]);if(o){v=o;break;}}
+        v=v||"dark";localStorage.setItem(k,v);}
+      var m=(v==="system")?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):v;
+      document.documentElement.setAttribute("data-theme",m);}catch(e){}})();
+  </script>
+<!-- HUBGEN:theme end -->
 <title>Worksheets — Phil Young's English School</title>
+<!-- HUBGEN:head start -->
+  <meta name="description" content="Printable grammar worksheets, searchable by class and topic.">
+  <link rel="icon" href="https://arschul.github.io/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Worksheets">
+  <meta property="og:description" content="Printable grammar worksheets, searchable by class and topic.">
+  <meta property="og:url" content="https://arschul.github.io/worksheets/">
+  <link rel="stylesheet" href="https://arschul.github.io/assets/hub.v1.css">
+  <script defer src="https://arschul.github.io/assets/hub.v1.js"></script>
+  <style>:root{--hub-bg:var(--bg);--hub-surface:var(--surface);--hub-ink:var(--ink);--hub-ink-soft:var(--ink-soft);--hub-rule:var(--rule);--hub-accent:var(--gold);--hub-radius:var(--radius);--hub-font-display:'Source Serif 4', serif;--hub-font-ui:'IBM Plex Sans', sans-serif;}</style>
+<!-- HUBGEN:head end -->
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -31,8 +52,7 @@
     padding:0 1.5rem;background:var(--bg);border-bottom:1px solid var(--rule);
     transition:background 0.3s,border-color 0.3s;
   }
-  .main-hub-link{color:var(--ink-soft);text-decoration:none;font-size:0.85rem;margin-right:1.3rem;transition:color 0.2s;}
-  .main-hub-link:hover{color:var(--gold);}
+  .hub-backlink{margin-right:1.3rem;}  /* color/hover live in assets/hub.v1.css */
   .nav-logo{font-family:'Source Serif 4',serif;font-weight:700;font-size:1.2rem;letter-spacing:-0.3px;text-decoration:none;color:var(--ink);}
   .nav-logo span{color:var(--gold);}
   .theme-toggle{
@@ -107,7 +127,9 @@
 </head>
 <body>
 <nav>
-  <a class="main-hub-link" href="https://arschul.github.io/">← Main Hub</a>
+<!-- HUBGEN:backlink start -->
+  <a class="hub-backlink" href="https://arschul.github.io/">← Classroom Hub</a>
+<!-- HUBGEN:backlink end -->
   <a class="nav-logo" href="index.html">Work<span>sheets</span></a>
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle light/dark mode">🌙</button>
 </nav>
@@ -193,23 +215,8 @@
       : `${matches.length} of ${worksheets.length} worksheets`;
   }
 
-  function toggleTheme(){
-    const root = document.documentElement;
-    const isLight = root.getAttribute('data-theme') === 'light';
-    root.setAttribute('data-theme', isLight ? 'dark' : 'light');
-    document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
-    localStorage.setItem('worksheets-theme', isLight ? 'dark' : 'light');
-  }
-  (function(){
-    const saved = localStorage.getItem('worksheets-theme');
-    if(saved === 'light'){
-      document.documentElement.setAttribute('data-theme','light');
-      document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('theme-btn');
-        if(btn) btn.textContent = '☀️';
-      });
-    }
-  })();
+  // Theme is owned by assets/hub.v1.js — it defines window.toggleTheme and
+  // keeps #theme-btn in sync across all hubs from one localStorage key.
 
   document.addEventListener('keydown', e => {
     if(e.key === '/' && document.activeElement.id !== 'searchInput'){
