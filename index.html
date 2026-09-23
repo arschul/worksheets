@@ -111,6 +111,15 @@
     transform:rotate(-3deg);white-space:nowrap;background:var(--gold-deep);
   }
 
+  .card-actions{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.9rem;}
+  .btn{
+    font-size:0.78rem;font-weight:600;text-decoration:none;padding:0.35rem 0.75rem;
+    border:1px solid var(--rule);border-radius:6px;color:var(--ink);background:var(--bg);
+    transition:border-color 0.2s,color 0.2s;
+  }
+  .btn:hover{border-color:var(--gold);color:var(--gold);}
+  .btn-key{background:var(--gold-deep);color:var(--gold);border-color:var(--gold);}
+
   .empty{
     text-align:center;padding:3rem 1rem;color:var(--ink-soft);font-size:0.95rem;
     border:1px dashed var(--rule);border-radius:var(--radius);
@@ -159,28 +168,29 @@
       class: "Basic 4",
       topics: ["Present Simple", "Present Continuous", "Past Simple", "Past Continuous", "Present Perfect"],
       date: "2026-06-17",
-      file: "Basic 4 - Review of Tenses Worksheet.pdf"
+      file: "basic-4/Basic_4_Review_of_Tenses_Worksheet.pdf"
     },
     {
       title: "Test 3 Reinforcement",
       class: "Basic 4",
       topics: ["Simple Past Passive", "Simple Present Passive", "Reflexive Pronouns", "Mixed Tenses", "Vocabulary"],
       date: "2026-06-25",
-      file: "Basic4_Test3_Reinforcement.pdf"
+      file: "basic-4/Basic_4_Test_3_Reinforcement.pdf"
     },
     {
       title: "Test 3 Reinforcement",
       class: "Intermediate 1",
       topics: ["Hope & Wish", "Relative Clauses", "Conditionals", "Past Perfect", "Word Formation", "Participial Adjectives"],
       date: "2026-06-25",
-      file: "Inter1_Test3_Reinforcement.pdf"
+      file: "inter-1/Inter_1_Test_3_Reinforcement.pdf"
     },
     {
       title: "Present Perfect Continuous",
       class: "Intermediate 1",
       topics: ["Present Perfect Continuous", "Statements with for & since", "Questions & Negatives", "B1"],
       date: "2026-09-23",
-      file: "Intermediate 1 - Present Perfect Continuous Worksheet.pdf"
+      file: "inter-1/Inter_1_Present_Perfect_Continuous_Worksheet.pdf",
+      key:  "inter-1/Inter_1_Present_Perfect_Continuous_Worksheet_-_Key.pdf"
     },
     // ADD NEW WORKSHEETS ABOVE THIS LINE
   ];
@@ -203,7 +213,7 @@
     });
 
     list.innerHTML = matches.map(w => `
-      <a class="card" href="${encodeURI(w.file)}" target="_blank" rel="noopener">
+      <div class="card">
         <div class="card-top">
           <div class="card-title">${w.title}</div>
           <div class="class-tab">${w.class}</div>
@@ -213,7 +223,11 @@
           <div class="topics">${w.topics.map(t => `<span class="topic-chip">${t}</span>`).join('')}</div>
           <div class="stamp">ADDED ${stamp(w.date)}</div>
         </div>
-      </a>
+        <div class="card-actions">
+          <a class="btn" href="${encodeURI(w.file)}" target="_blank" rel="noopener">Open worksheet</a>
+          ${w.key ? `<a class="btn btn-key" href="${encodeURI(w.key)}" target="_blank" rel="noopener">Answer key</a>` : ''}
+        </div>
+      </div>
     `).join('');
 
     empty.style.display = matches.length ? 'none' : 'block';
